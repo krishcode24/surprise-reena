@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday Reena</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #ffc1e3;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      z-index: 10;
+      position: relative;
+    }
+
+    /* Video slideshow on left */
+    .video-container {
+      width: 300px;
+      height: 500px; /* portrait size */
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .video-container video.active {
+      opacity: 1;
+    }
+
+    /* Birthday card on right */
+    .card {
+      background: rgba(255, 240, 245, 0.95);
+      padding: 30px 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #ff1493;
+      margin-bottom: 20px;
+    }
+
+    .name {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #c71585;
+    }
+
+    .meaning {
+      text-align: left;
+      font-size: 16px;
+      color: #8b008b;
+      line-height: 1.8;
+    }
+
+    .meaning span {
+      font-weight: bold;
+      color: #ff1493;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #c71585;
+    }
+
+    /* Heart style */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff1493;
+      transform: rotate(-45deg);
+      top: 100%;
+      animation: floatUp linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff1493;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      top: 0;
+      left: 10px;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(-45deg); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(-45deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Video slideshow -->
+    <div class="video-container">
+      <video src="clip1.mp4" muted autoplay loop class="active"></video>
+      <video src="clip2.mp4" muted autoplay loop></video>
+      <video src="clip3.mp4" muted autoplay loop></video>
+    </div>
+
+    <!-- Birthday card -->
+    <div class="card">
+      <h1>🎂 Happy Birthday 🎂</h1>
+      <div class="name">Reena</div>
+
+      <div class="meaning">
+        <p><span>R</span> – Radiant smile that makes everyone feel happy</p>
+        <p><span>E</span> – Encouraging heart that always supports others</p>
+        <p><span>E</span> – Energetic soul full of laughter and joy</p>
+        <p><span>N</span> – Naturally kind, caring, and thoughtful</p>
+        <p><span>A</span> – Amazing friend who makes every moment special</p>
+      </div>
+
+      <footer>💖 Made with friendship 💖</footer>
+    </div>
+  </div>
+
+  <script>
+    // Heart animation
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.animationDuration = (3 + Math.random() * 2) + 's';
+      heart.style.width = heart.style.height = (10 + Math.random() * 20) + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 300);
+
+    // Video slideshow
+    const videos = document.querySelectorAll('.video-container video');
+    let current = 0;
+
+    setInterval(() => {
+      videos[current].classList.remove('active');
+      current = (current + 1) % videos.length;
+      videos[current].classList.add('active');
+    }, 5000); // switch video every 5 seconds
+  </script>
+
+</body>
+</html>
